@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>rob_johnston</Authors>
+    <Description>A .Net Standard client for the NDAX cryptocurrency API.</Description>
+    <Copyright>Copyright © 2018 Rob Johnston</Copyright>
+    <PackageLicenseUrl>https://github.com/RobJohnston/Ndax.Api/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/RobJohnston/Ndax.Api</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RobJohnston/Ndax.Api</RepositoryUrl>
+    <PackageTags>api-client; cryptocurrency; bitcoin; litecoin; ethereum; ripple; eos; ndax</PackageTags>
+    <PackageReleaseNotes>Sign-up with NDAX:  https://ndax.io/signup.html?aff=rob_johnston</PackageReleaseNotes>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+  </ItemGroup>
+
+</Project>
