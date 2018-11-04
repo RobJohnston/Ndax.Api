@@ -2,10 +2,11 @@
 A .Net Standard client for the NDAX cryptocurrency API.
 
 [![nuget](https://img.shields.io/nuget/v/Ndax.Api.svg)](https://www.nuget.org/packages/Ndax.Api/)
+[![Downloads](https://img.shields.io/nuget/dt/Ndax.Api.svg)
 
 An account is not required to access the public API methods. 
 However, if you do create an account, please use my affiliate link when you register.
-It's an easy way to give back at no cost to you: https://ndax.io/signup.html?aff=rob_johnston
+It's an easy way to give back to this project at no cost to you: https://ndax.io/signup.html?aff=rob_johnston
 
 
 [![Sign-up with NDAX](https://github.com/RobJohnston/Ndax.Api/blob/master/300x250%20-%20Blue.png)](https://ndax.io/signup.html?aff=rob_johnston)
@@ -95,6 +96,7 @@ Press any key to exit.
 Need more than what this Web API provides?  Follow the development of my [AlphaPoint.Api](https://github.com/RobJohnston/AlphaPoint.Api) project that uses the WebSocket API.
 
 * [QuadrigaCX.Api](https://github.com/RobJohnston/QuadrigaCX.Api)
-* [EzBtc.Api](https://github.com/RobJohnston/EzBtc.Api)
+* [CoinField.Api](https://github.com/RobJohnston/CoinField.Api)
 * [Coinsquare.Api](https://github.com/RobJohnston/Coinsquare.Api)
+* [EzBtc.Api](https://github.com/RobJohnston/EzBtc.Api)
 * [AnxPro.Api](https://github.com/RobJohnston/AnxPro.Api)
