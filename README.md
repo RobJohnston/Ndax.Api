@@ -95,8 +95,5 @@ Press any key to exit.
 
 Need more than what this Web API provides?  Follow the development of my [AlphaPoint.Api](https://github.com/RobJohnston/AlphaPoint.Api) project that uses the WebSocket API.
 
-* [QuadrigaCX.Api](https://github.com/RobJohnston/QuadrigaCX.Api)
 * [CoinField.Api](https://github.com/RobJohnston/CoinField.Api)
 * [Coinsquare.Api](https://github.com/RobJohnston/Coinsquare.Api)
-* [EzBtc.Api](https://github.com/RobJohnston/EzBtc.Api)
-* [AnxPro.Api](https://github.com/RobJohnston/AnxPro.Api)
