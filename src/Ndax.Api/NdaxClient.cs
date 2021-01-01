@@ -1,11 +1,10 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Ndax.Api
@@ -15,9 +14,9 @@ namespace Ndax.Api
         private string _url;
         private readonly HttpClient _httpClient = new HttpClient();
 
-        internal static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
+        internal static readonly JsonSerializerOptions JsonSettings = new JsonSerializerOptions
         {
-            ContractResolver = new DefaultContractResolver { NamingStrategy = new DefaultNamingStrategy() }
+            PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         };
 
         #region Constructors
@@ -96,7 +95,7 @@ namespace Ndax.Api
             Debug.WriteLine(jsonContent);
 
             // Deserialize the response.
-            var response = JsonConvert.DeserializeObject<T>(jsonContent, JsonSettings);
+            var response = JsonSerializer.Deserialize<T>(jsonContent, JsonSettings);
 
             return response;
         }

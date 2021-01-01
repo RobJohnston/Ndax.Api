@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Ndax.Api.Models
 {
@@ -7,35 +7,34 @@ namespace Ndax.Api.Models
     /// </summary>
     public partial class Instrument
     {
-        [JsonProperty("isFrozen")]
-        [JsonConverter(typeof(BoolConverter))]
+        [JsonPropertyName("isFrozen")]
         public bool IsFrozen { get; set; }
 
-        [JsonProperty("lowestAsk")]
+        [JsonPropertyName("lowestAsk")]
         public decimal LowestAsk { get; set; }
 
-        [JsonProperty("highestBid")]
+        [JsonPropertyName("highestBid")]
         public decimal HighestBid { get; set; }
 
-        [JsonProperty("last")]
+        [JsonPropertyName("last")]
         public decimal Last { get; set; }
 
-        [JsonProperty("high24hr")]
+        [JsonPropertyName("high24hr")]
         public decimal? High24Hr { get; set; }
 
-        [JsonProperty("low24hr")]
+        [JsonPropertyName("low24hr")]
         public decimal? Low24Hr { get; set; }
 
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public long Id { get; set; }
 
-        [JsonProperty("percentChange")]
+        [JsonPropertyName("percentChange")]
         public decimal? PercentChange { get; set; }
 
-        [JsonProperty("baseVolume")]
+        [JsonPropertyName("baseVolume")]
         public decimal? BaseVolume { get; set; }
 
-        [JsonProperty("quoteVolume")]
+        [JsonPropertyName("quoteVolume")]
         public decimal? QuoteVolume { get; set; }
     }
 }
