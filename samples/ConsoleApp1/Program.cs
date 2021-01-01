@@ -1,21 +1,40 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Ndax.Api;
 
 namespace ConsoleApp1
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task<int> Main(string[] args)
         {
             Console.WriteLine("Hello NDAX!\n");
 
-            using (var client = new NdaxClient())
+            var builder = new HostBuilder()
+            .ConfigureServices((hostContext, services) =>
             {
+                services.AddHttpClient<INdaxClient, NdaxClient>(c =>
+                {
+                    c.BaseAddress = new Uri("https://core.ndax.io/");
+                }
+                );
+
+                services.AddTransient<NdaxClient>();
+            }).UseConsoleLifetime();
+
+            var host = builder.Build();
+
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var services = serviceScope.ServiceProvider;
+
                 try
                 {
-                    var t = Task.Run(() => client.GetTickerAsync());
-                    var ticker = t.Result;
+                    var ndaxService = services.GetRequiredService<INdaxClient>();
+                    var ticker = await ndaxService.GetTickerAsync();
 
                     foreach (var item in ticker)
                     {
@@ -29,12 +48,13 @@ namespace ConsoleApp1
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+
+                    logger.LogError(ex, "An error occurred.");
                 }
             }
 
-            Console.WriteLine("\nPress any key to exit.");
-            Console.ReadKey();
+            return 0;
         }
     }
 }

@@ -10,7 +10,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) a
 
 ### Added
 - Console app with example usage.
+- Constructor that takes an `HttpClient`, with updated example of using a Typed Client.
 
+### Deprecated
+- Parameterless constructor.
 
 ## 1.0.0 - 2018-10-01
 ### Added

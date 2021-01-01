@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace Ndax.Api
 {
-    public partial class NdaxClient : IDisposable
+    public partial class NdaxClient : INdaxClient, IDisposable
     {
-        private string _url;
-        private readonly HttpClient _httpClient = new HttpClient();
+        private const string baseAddress = "https://core.ndax.io/";
+        private readonly HttpClient _httpClient;
+        private readonly IHttpClientFactory _clientFactory;
 
         internal static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
         {
@@ -25,10 +26,20 @@ namespace Ndax.Api
         /// <summary>
         /// Initializes a new instance of the <see cref="NdaxClient"/> class.
         /// </summary>
+        [Obsolete("Use the constructor that takes an HttpClient in order to use this library as a 'Typed Client'.")]
         public NdaxClient()
         {
-            _url = "https://core.ndax.io";
-            _httpClient.BaseAddress = new Uri(_url);
+            var client = new HttpClient
+            {
+                BaseAddress = new Uri(baseAddress)
+            };
+
+            _httpClient = client;
+        }
+
+        public NdaxClient(HttpClient client)
+        {
+            _httpClient = client;
         }
 
         #endregion
