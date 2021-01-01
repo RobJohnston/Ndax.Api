@@ -14,7 +14,6 @@ namespace Ndax.Api
     {
         private const string baseAddress = "https://core.ndax.io/";
         private readonly HttpClient _httpClient;
-        private readonly IHttpClientFactory _clientFactory;
 
         internal static readonly JsonSerializerSettings JsonSettings = new JsonSerializerSettings
         {
