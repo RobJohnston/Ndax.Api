@@ -27,7 +27,7 @@ namespace Ndax.Api
         /// </summary>
         public NdaxClient()
         {
-            _url = "https://ndax.io/api/";
+            _url = "https://core.ndax.io";
             _httpClient.BaseAddress = new Uri(_url);
         }
 

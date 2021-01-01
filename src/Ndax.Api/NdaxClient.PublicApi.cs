@@ -14,7 +14,7 @@ namespace Ndax.Api
         public async Task<Dictionary<string, Instrument>> GetTickerAsync()
         {
             return await QueryPublicAsync<Dictionary<string, Instrument>>(
-                "returnticker",
+                "/v1/ticker",
                 null
             );
         }
