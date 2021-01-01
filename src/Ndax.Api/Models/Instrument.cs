@@ -21,21 +21,21 @@ namespace Ndax.Api.Models
         public decimal Last { get; set; }
 
         [JsonProperty("high24hr")]
-        public decimal High24Hr { get; set; }
+        public decimal? High24Hr { get; set; }
 
         [JsonProperty("low24hr")]
-        public decimal Low24Hr { get; set; }
+        public decimal? Low24Hr { get; set; }
 
         [JsonProperty("id")]
         public long Id { get; set; }
 
         [JsonProperty("percentChange")]
-        public decimal PercentChange { get; set; }
+        public decimal? PercentChange { get; set; }
 
         [JsonProperty("baseVolume")]
-        public decimal BaseVolume { get; set; }
+        public decimal? BaseVolume { get; set; }
 
         [JsonProperty("quoteVolume")]
-        public decimal QuoteVolume { get; set; }
+        public decimal? QuoteVolume { get; set; }
     }
 }
