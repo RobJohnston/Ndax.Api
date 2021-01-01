@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Ndax.Api;
+using Refit;
 
 namespace ConsoleApp1
 {
@@ -16,13 +17,12 @@ namespace ConsoleApp1
             var builder = new HostBuilder()
             .ConfigureServices((hostContext, services) =>
             {
-                services.AddHttpClient<INdaxClient, NdaxClient>(c =>
+                services.AddHttpClient("ndax", c =>
                 {
                     c.BaseAddress = new Uri("https://core.ndax.io/");
                 }
-                );
-
-                services.AddTransient<NdaxClient>();
+                )
+                .AddTypedClient(c => Refit.RestService.For<INdaxClient>(c));
             }).UseConsoleLifetime();
 
             var host = builder.Build();
@@ -30,6 +30,7 @@ namespace ConsoleApp1
             using (var serviceScope = host.Services.CreateScope())
             {
                 var services = serviceScope.ServiceProvider;
+                var logger = services.GetRequiredService<ILogger<Program>>();
 
                 try
                 {
@@ -46,10 +47,12 @@ namespace ConsoleApp1
                         instrument.Id, instrument.HighestBid, instrument.LowestAsk, instrument.PercentChange));
                     }
                 }
+                catch (ApiException ex)
+                {
+                    logger.LogError(ex, $"{ex.StatusCode} - {ex.ReasonPhrase}");
+                }
                 catch (Exception ex)
                 {
-                    var logger = services.GetRequiredService<ILogger<Program>>();
-
                     logger.LogError(ex, "An error occurred.");
                 }
             }
