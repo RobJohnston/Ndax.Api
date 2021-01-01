@@ -19,24 +19,43 @@ Install-Package Ndax.Api
 ## Example usage
 
 ```csharp
-using Ndax.Api;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Ndax.Api;
 
 namespace ConsoleApp1
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task<int> Main(string[] args)
         {
             Console.WriteLine("Hello NDAX!\n");
 
-            using (var client = new NdaxClient())
+            var builder = new HostBuilder()
+            .ConfigureServices((hostContext, services) =>
             {
+                services.AddHttpClient<INdaxClient, NdaxClient>(c =>
+                {
+                    c.BaseAddress = new Uri("https://core.ndax.io/");
+                }
+                );
+
+                services.AddTransient<NdaxClient>();
+            }).UseConsoleLifetime();
+
+            var host = builder.Build();
+
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var services = serviceScope.ServiceProvider;
+
                 try
                 {
-                    var t = Task.Run(() => client.GetTickerAsync());
-                    var ticker = t.Result;
+                    var ndaxService = services.GetRequiredService<INdaxClient>();
+                    var ticker = await ndaxService.GetTickerAsync();
 
                     foreach (var item in ticker)
                     {
@@ -50,12 +69,13 @@ namespace ConsoleApp1
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine(ex.Message);
+                    var logger = services.GetRequiredService<ILogger<Program>>();
+
+                    logger.LogError(ex, "An error occurred.");
                 }
             }
 
-            Console.WriteLine("\nPress any key to exit.");
-            Console.ReadKey();
+            return 0;
         }
     }
 }
@@ -67,28 +87,42 @@ namespace ConsoleApp1
 Hello NDAX!
 
 Trading pair: BTC_CAD
-ID: 1, Bid = 8391.8951, Ask = 8562.01, % Change = -1.0274674681631022
-
-Trading pair: BCH_CAD
-ID: 2, Bid = 668.97, Ask = 696.29, % Change = 0
+ID: 1, Bid = 37187.53, Ask = 37318.28, % Change = 0.4331174089068826
 
 Trading pair: ETH_CAD
-ID: 3, Bid = 289.03, Ask = 307.57, % Change = -8.864292589027912
+ID: 3, Bid = 937, Ask = 949.98, % Change = -1.6769884513187416
 
 Trading pair: XRP_CAD
-ID: 4, Bid = 0.73146, Ask = 0.77764, % Change = -9.902446865070043
+ID: 4, Bid = 0.29101, Ask = 0.30753, % Change = 1.1546621222133342
 
 Trading pair: LTC_CAD
-ID: 5, Bid = 75.87, Ask = 80.15, % Change = 0
-
-Trading pair: BTC_USD
-ID: 74, Bid = 0, Ask = 0, % Change = 0
+ID: 5, Bid = 157, Ask = 164.44, % Change = 1.302710378465148
 
 Trading pair: EOS_CAD
-ID: 75, Bid = 7.185, Ask = 7.6135, % Change = 0
+ID: 75, Bid = 3.252, Ask = 3.4132, % Change = 3.4702380952380953
+
+Trading pair: XLM_CAD
+ID: 76, Bid = 0.165713, Ask = 0.172918, % Change = 10.664092516972241
+
+Trading pair: DOGE_CAD
+ID: 77, Bid = 0.006605, Ask = 0.0069388, % Change = 17.24194073591664
+
+Trading pair: ADA_CAD
+ID: 78, Bid = 0.22115, Ask = 0.2283, % Change = -2.6991525423728815
+
+Trading pair: USDT_CAD
+ID: 80, Bid = 1.2821, Ask = 1.2961, % Change = 0.14683153013910355
+
+Trading pair: LINK_CAD
+ID: 81, Bid = 15, Ask = 15.43, % Change = 7.9020979020979025
+
+Trading pair: BTC_USDT
+ID: 82, Bid = 29169.8, Ask = 29269.24, % Change =
 
 
-Press any key to exit.
+...
+Press any key to close this window . . .
+
 ```
 
 ## My related projects
