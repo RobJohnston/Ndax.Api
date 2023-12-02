@@ -12,10 +12,10 @@ namespace Ndax.Api.Models
         public bool IsFrozen { get; set; }
 
         [JsonProperty("lowestAsk")]
-        public decimal LowestAsk { get; set; }
+        public decimal? LowestAsk { get; set; }
 
         [JsonProperty("highestBid")]
-        public decimal HighestBid { get; set; }
+        public decimal? HighestBid { get; set; }
 
         [JsonProperty("last")]
         public decimal Last { get; set; }
