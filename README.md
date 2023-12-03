@@ -6,10 +6,8 @@ A .Net Standard client for the NDAX cryptocurrency API.
 
 An account is not required to access the public API methods. 
 However, if you do create an account, please use my affiliate link when you register.
-It's an easy way to give back to this project at no cost to you: https://ndax.io/signup.html?aff=rob_johnston
+It's an easy way to give back to this project at no cost to you: https://refer.ndax.io/jbBH
 
-
-[![Sign-up with NDAX](https://github.com/RobJohnston/Ndax.Api/blob/master/300x250%20-%20Blue.png)](https://ndax.io/signup.html?aff=rob_johnston)
 
 ## Installation via NuGet
 ```
@@ -129,5 +127,4 @@ Press any key to close this window . . .
 
 Need more than what this Web API provides?  Follow the development of my [AlphaPoint.Api](https://github.com/RobJohnston/AlphaPoint.Api) project that uses the WebSocket API.
 
-* [CoinField.Api](https://github.com/RobJohnston/CoinField.Api)
 * [Coinsquare.Api](https://github.com/RobJohnston/Coinsquare.Api)
